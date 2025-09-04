@@ -30,6 +30,13 @@ jobs:
      with:
       name: bandit-findings
       path: bandit-report.json
+      
+   - name: Ensure Docker daemon.json exists
+     run: |
+       if [ ! -f /etc/docker/daemon.json ]; then
+       echo '{}' | sudo tee /etc/docker/daemon.json
+         fi
+           sudo cat /etc/docker/daemon.json
 
  image_scan:
    name: Build Image and Run Image Scan
